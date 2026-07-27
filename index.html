@@ -275,49 +275,66 @@
 
   <script>
     /* ============================================================
-       AUDIODATEI HIER EINFACH AUSTAUSCHEN
-       Einfach den Dateinamen/Pfad anpassen - fertig.
-    ============================================================ */
-    const audioFile = "gutenachtgeschichte/gutenachtgeschichte.mp3";
+   AUDIODATEI HIER EINFACH AUSTAUSCHEN
+   Einfach den Dateinamen/Pfad anpassen - fertig.
+============================================================ */
 
-    const audioEl = document.getElementById('bedtimeAudio');
-    audioEl.src = audioFile;
+const audioFile = "gutenachtgeschichte/gutenachtgeschichte.mp3";
 
-    const playButton = document.getElementById('playButton');
+const audioEl = document.getElementById('bedtimeAudio');
+audioEl.src = audioFile;
 
-    const startScreen = document.getElementById('startScreen');
-    
-    const mainContent = document.getElementById('mainContent');
-    
-    const ambientAudio = new Audio("gutenachtgeschichte/ambiente.mp3");
-    
-    ambientAudio.loop = true;
-    ambientAudio.volume = 0.04;
+console.log("Audio-Datei:", audioEl.src);
 
-    playButton.addEventListener('click', () => {
-      if (audioEl.paused) {
-        audioEl.play().catch(err => {
-          console.warn("Audio konnte nicht gestartet werden:", err);
-        });
-      } else {
+audioEl.addEventListener("error", () => {
+    console.error("Audiofehler:", audioEl.error);
+});
+
+const playButton = document.getElementById('playButton');
+
+const startScreen = document.getElementById('startScreen');
+
+const mainContent = document.getElementById('mainContent');
+
+const ambientAudio = new Audio("gutenachtgeschichte/ambiente.mp3");
+
+ambientAudio.loop = true;
+ambientAudio.volume = 0.04;
+
+playButton.addEventListener('click', () => {
+
+    if (audioEl.paused) {
+
+        audioEl.play()
+            .then(() => {
+                console.log("Audio gestartet!");
+            })
+            .catch(err => {
+                console.error("Fehler beim Starten:", err);
+            });
+
+    } else {
+
         audioEl.pause();
-      }
-    });
 
-    audioEl.addEventListener('play', () => {
-      ambientAudio.volume = 0.02;   // Hintergrund wird leiser
-      playButton.classList.add('is-playing');
-    });
-    
-    audioEl.addEventListener('pause', () => {
-      ambientAudio.volume = 0.04;    // Hintergrund wieder lauter
-      playButton.classList.remove('is-playing');
-    });
-    
-    audioEl.addEventListener('ended', () => {
-      ambientAudio.volume = 0.02;    // Nach Ende wieder normale Lautstärke
-      playButton.classList.remove('is-playing');
-    });
+    }
+
+});
+
+audioEl.addEventListener('play', () => {
+    ambientAudio.volume = 0.02;
+    playButton.classList.add('is-playing');
+});
+
+audioEl.addEventListener('pause', () => {
+    ambientAudio.volume = 0.04;
+    playButton.classList.remove('is-playing');
+});
+
+audioEl.addEventListener('ended', () => {
+    ambientAudio.volume = 0.04;
+    playButton.classList.remove('is-playing');
+});
 
     /* ============================================================
        PIXEL-STERNENHIMMEL
