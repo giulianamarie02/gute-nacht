@@ -278,7 +278,7 @@
        AUDIODATEI HIER EINFACH AUSTAUSCHEN
        Einfach den Dateinamen/Pfad anpassen - fertig.
     ============================================================ */
-    const audioFile = "gutenachtgeschichte.mp3";
+    const audioFile = "gutenachtgeschichte/gutenachtgeschichte.mp3";
 
     const audioEl = document.getElementById('bedtimeAudio');
     audioEl.src = audioFile;
@@ -289,7 +289,7 @@
     
     const mainContent = document.getElementById('mainContent');
     
-    const ambientAudio = new Audio("ambiente.mp3");
+    const ambientAudio = new Audio("gutenachtgeschichte/ambiente.mp3");
     
     ambientAudio.loop = true;
     ambientAudio.volume = 0.04;
