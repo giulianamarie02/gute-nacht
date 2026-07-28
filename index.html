@@ -322,17 +322,17 @@ playButton.addEventListener('click', () => {
 });
 
 audioEl.addEventListener('play', () => {
-    ambientAudio.volume = 0.015;
+    ambientAudio.pause();
     playButton.classList.add('is-playing');
 });
 
 audioEl.addEventListener('pause', () => {
-    ambientAudio.volume = 0.04;
+    ambientAudio.play();
     playButton.classList.remove('is-playing');
 });
 
 audioEl.addEventListener('ended', () => {
-    ambientAudio.volume = 0.04;
+    ambientAudio.play();
     playButton.classList.remove('is-playing');
 });
 
